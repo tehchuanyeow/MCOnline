@@ -83,7 +83,7 @@ export const Navbar = () => {
           <div className="w-40">
             <img src={brand} alt="brand" />
           </div>
-          <nav className="w-full flex justify-around items-center">
+          <nav className="hidden w-full sm:flex justify-around items-center">
             <Dropdown menu={{ items }} className="cursor-pointer">
               <a onClick={(e) => e.preventDefault()}>
                 <Space>

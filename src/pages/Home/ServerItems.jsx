@@ -196,7 +196,7 @@ const ServerItems = () => {
 
   return (
     <div>
-      <div className="p-5 grid grid-cols-3 gap-5">
+      <div className="p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {items.map((server) => (
           <ServerCard
             showModal={showModal}
@@ -212,8 +212,8 @@ const ServerItems = () => {
         open={isModalOpen}
         footer={null}
       >
-        <div className="flex">
-          <div className="bg-dark1 px-2 py-4 w-20 flex flex-col items-center">
+        <div className="md:flex">
+          <div className="bg-dark1 px-2 py-4 md:w-20 flex md:flex-col items-center">
             <BiSolidCategory
               onClick={() => setModalActiveItem(1)}
               className={`${
@@ -227,24 +227,24 @@ const ServerItems = () => {
               } p-2 text-4xl rounded-md`}
             />
           </div>
-          <div className="text-white bg-dark2 p-5 flex-1">
+          <div className="text-white bg-dark2 p-5 md:flex-1">
             <h6 className="text-lg">Overview</h6>
             <h6 className="text-2xl font-semibold my-5">Hyoundai Ionic 5</h6>
 
             {modalActiveItem === 1 ? (
               <div>
-                <div className="flex gap-2 text-dark1">
-                  <div className="w-1/3 bg-white rounded-md p-2">
+                <div className="md:flex gap-2 text-dark1">
+                  <div className="md:w-1/3 mb-2 md:mb-0 bg-white rounded-md p-2">
                     <MdOnlinePrediction className="text-3xl" />
                     <h6 className="text-4xl font-bold my-2">70</h6>
                     <h6>Online Players</h6>
                   </div>
-                  <div className="w-1/3 bg-white rounded-md p-2">
+                  <div className="md:w-1/3 mb-2 md:mb-0 bg-white rounded-md p-2">
                     <LuServerCrash className="text-3xl" />
                     <h6 className="text-4xl font-bold my-2">70</h6>
                     <h6>Server Types</h6>
                   </div>
-                  <div className="w-1/3 bg-white rounded-md p-2">
+                  <div className="md:w-1/3 mb-2 md:mb-0 bg-white rounded-md p-2">
                     <BiSolidUpvote className="text-3xl" />
                     <h6 className="text-4xl font-bold my-2">70</h6>
                     <h6>Votes</h6>
@@ -286,7 +286,7 @@ const ServerItems = () => {
                 ></iframe>
 
                 <div className="p-5 bg-white text-dark1 rounded my-5">
-                  <div className="flex items-center justify-between">
+                  <div className="md:flex items-center justify-between">
                     <div className="flex items-center gap-4">
                       <BsShieldShaded className="text-3xl" />
                       <div>
@@ -315,7 +315,7 @@ const ServerItems = () => {
                       </div>
                     </div>
 
-                    <div className="my-5 flex gap-1">
+                    <div className="my-5 flex gap-1 overflow-x-scroll">
                       {[
                         ...Array(70)
                           .fill(null)
@@ -330,7 +330,7 @@ const ServerItems = () => {
                       ]}
                     </div>
 
-                    <div className="my-5 flex justify-between">
+                    <div className="my-5 flex justify-between overflow-x-scroll">
                       {[
                         ...Array(70)
                           .fill(null)

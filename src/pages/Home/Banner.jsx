@@ -3,7 +3,7 @@ import { BsLifePreserver } from "react-icons/bs";
 const Banner = () => {
   return (
     <div className="text-white flex">
-      <div className="bg-dark1 h-[500px] hide-bar overflow-y-scroll p-20">
+      <div className="hidden lg:block bg-dark1 h-[500px] hide-bar overflow-y-scroll p-20">
         <div className="flex flex-col gap-10">
           <div className="text-center">
             <BsLifePreserver className="text-9xl" />
