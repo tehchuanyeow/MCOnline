@@ -1,9 +1,12 @@
 import { Home } from "../pages/Home/Home";
 import Voting from "../pages/Home/Voting";
+import { Login } from "../pages/Login";
 import ProfilePage from "../pages/ProfilePage";
+import { Register } from "../pages/Register";
 import SponsorAuction from "../pages/SponsorAuction";
 import UploadServer from "../pages/UploadServer";
 import UserList from "../pages/UserList";
+import PublicRoute from "./PublicRoute";
 
 export const userRouter = [
   {
@@ -13,6 +16,22 @@ export const userRouter = [
   {
     path: "/profile",
     element: <ProfilePage />,
+  },
+  {
+    path: "/login",
+    element: (
+      <PublicRoute>
+        <Login />
+      </PublicRoute>
+    ),
+  },
+  {
+    path: "/register",
+    element: (
+      <PublicRoute>
+        <Register />
+      </PublicRoute>
+    ),
   },
   {
     path: "/voting",

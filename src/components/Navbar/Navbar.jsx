@@ -7,8 +7,10 @@ import { Button, Dropdown, Space } from "antd";
 import { MdNordicWalking, MdNotifications, MdSmsFailed } from "react-icons/md";
 import { BiChevronDown } from "react-icons/bi";
 import { Link, NavLink } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 export const Navbar = () => {
+  const { currentUser } = useAuth();
   const [open, setOpen] = useState(false);
 
   const items = [
@@ -58,6 +60,24 @@ export const Navbar = () => {
     },
   ];
 
+  const profileItems = [
+    {
+      key: "1",
+      label: <Link to="/profile">Profile</Link>,
+    },
+    {
+      key: "2",
+      label: (
+        <Button
+          type="danger"
+          className="bg-red-400 text-white hover:bg-red-600"
+        >
+          Logout
+        </Button>
+      ),
+    },
+  ];
+
   const downNavItems = [
     {
       lable: "nav1",
@@ -80,9 +100,9 @@ export const Navbar = () => {
     <div className="dark:bg-slate-950">
       <Container>
         <div className="border-b p-4 flex items-center justify-between gap-5">
-          <div className="w-40">
-            <img src={brand} alt="brand" />
-          </div>
+          <Link to={"/"} className="w-14">
+            <img className="w-full" src={brand} alt="brand" />
+          </Link>
           <nav className="hidden w-full sm:flex justify-around items-center">
             <Dropdown menu={{ items }} className="cursor-pointer">
               <a onClick={(e) => e.preventDefault()}>
@@ -107,20 +127,26 @@ export const Navbar = () => {
                 <MdNotifications className="text-3xl" />
               </a>
             </Dropdown>
-            <Dropdown
-              className="cursor-pointer"
-              menu={{ items }}
-              trigger={["click"]}
-              placement="bottomRight"
-            >
-              <a onClick={(e) => e.preventDefault()}>
-                <img
-                  className="w-10 h-10 rounded-full border border-black"
-                  src={avatar}
-                  alt=""
-                />
-              </a>
-            </Dropdown>
+            {currentUser ? (
+              <Dropdown
+                className="cursor-pointer"
+                menu={{ items: profileItems }}
+                trigger={["click"]}
+                placement="bottomRight"
+              >
+                <a onClick={(e) => e.preventDefault()}>
+                  <img
+                    className="w-10 h-10 rounded-full border border-black"
+                    src={avatar}
+                    alt=""
+                  />
+                </a>
+              </Dropdown>
+            ) : (
+              <Link to={"/login"}>
+                <Button>Login</Button>
+              </Link>
+            )}
           </nav>
           <div onClick={() => setOpen(!open)} className="md:hidden text-2xl">
             {open ? (

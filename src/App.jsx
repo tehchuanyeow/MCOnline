@@ -1,12 +1,12 @@
 import { RouterProvider } from "react-router-dom";
 import { router } from "./routes/router";
-import { ThemeProvider } from "@material-tailwind/react";
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
   return (
-    <ThemeProvider>
+    <AuthProvider>
       <RouterProvider router={router} />
-    </ThemeProvider>
+    </AuthProvider>
   );
 }
 
