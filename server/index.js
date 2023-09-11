@@ -12,7 +12,7 @@ app.use(express.json());
 const port = process.env.PORT || 5000;
 
 app.get("/", (req, res) => {
-  res.send("Agrios Server is running.");
+  res.send("Server is running.");
 });
 
 app.post("/jwt", (req, res) => {
@@ -64,6 +64,23 @@ async function run() {
     app.get("/users/:userEmail", async (req, res) => {
       const email = req.params.userEmail;
       const result = await users.findOne({ email: email });
+      res.send(result);
+    });
+
+    app.patch("/user/:userEmail", async (req, res) => {
+      const email = req.params.userEmail;
+      const { displayName, photoURL } = req.body;
+
+      const filter = { email: email };
+      const updateDoc = {
+        $set: {
+          displayName: displayName,
+          photoURL: photoURL,
+        },
+      };
+
+      const result = await users.updateOne(filter, updateDoc);
+
       res.send(result);
     });
 

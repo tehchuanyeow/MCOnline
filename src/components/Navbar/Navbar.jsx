@@ -10,7 +10,7 @@ import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
 export const Navbar = () => {
-  const { currentUser } = useAuth();
+  const { currentUser, logout } = useAuth();
   const [open, setOpen] = useState(false);
 
   const items = [
@@ -63,12 +63,13 @@ export const Navbar = () => {
   const profileItems = [
     {
       key: "1",
-      label: <Link to="/profile">Profile</Link>,
+      label: <Link to="/user-profile">Profile</Link>,
     },
     {
       key: "2",
       label: (
         <Button
+          onClick={logout}
           type="danger"
           className="bg-red-400 text-white hover:bg-red-600"
         >
@@ -99,11 +100,15 @@ export const Navbar = () => {
   return (
     <div className="dark:bg-slate-950">
       <Container>
-        <div className="border-b p-4 flex items-center justify-between gap-5">
+        <div className="relative border-b p-4 flex items-center justify-between gap-5">
           <Link to={"/"} className="w-14">
             <img className="w-full" src={brand} alt="brand" />
           </Link>
-          <nav className="hidden w-full sm:flex justify-around items-center">
+          <nav
+            className={`${
+              open ? "md:relative absolute flex bg-dark1" : "hidden"
+            } w-full text-white md:flex top-0 md:text-dark1 md:bg-transparent md:py-0 py-10 md:flex-row flex-col gap-5 justify-around items-center`}
+          >
             <Dropdown menu={{ items }} className="cursor-pointer">
               <a onClick={(e) => e.preventDefault()}>
                 <Space>
@@ -114,7 +119,9 @@ export const Navbar = () => {
             </Dropdown>
             <NavLink>Dr. Ks Guide</NavLink>
             <Link to="/upload-server">
-              <Button>Upload Server</Button>
+              <Button className="md:text-dark1 text-white">
+                Upload Server
+              </Button>
             </Link>
             <NavLink>Contact</NavLink>
             <Dropdown
@@ -137,7 +144,7 @@ export const Navbar = () => {
                 <a onClick={(e) => e.preventDefault()}>
                   <img
                     className="w-10 h-10 rounded-full border border-black"
-                    src={avatar}
+                    src={currentUser?.photoURL ? currentUser.photoURL : avatar}
                     alt=""
                   />
                 </a>
@@ -148,9 +155,12 @@ export const Navbar = () => {
               </Link>
             )}
           </nav>
-          <div onClick={() => setOpen(!open)} className="md:hidden text-2xl">
+          <div
+            onClick={() => setOpen(!open)}
+            className="z-40 md:hidden text-2xl"
+          >
             {open ? (
-              <SlClose className="absolute right-6 top-9 text-3xl z-20" />
+              <SlClose className="absolute text-primary right-6 top-9 text-3xl z-20" />
             ) : (
               <SlMenu className="text-black text-xl" />
             )}

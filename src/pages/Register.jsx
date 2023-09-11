@@ -50,12 +50,12 @@ export const Register = () => {
         axios
           .post(`${import.meta.env.VITE_BASE_API_URL}/user`, {
             email,
-            name,
+            displayName: name,
             photoURL,
             address,
             gender,
             phoneNumber,
-            role: "student",
+            role: "user",
           })
           .then((response) => {
             if (response.status === 200) {
