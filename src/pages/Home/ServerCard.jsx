@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const ServerCard = ({ serverData, showModal }) => {
   const { title, thumbnail, serverImage, serverName, views } = serverData;
   return (
-    <div onClick={showModal}>
+    <div onClick={showModal} className="text-white">
       <img className="rounded-md" src={thumbnail} alt="thumbnail" />
       <div className="flex gap-2 mt-2">
         <Link to="/profile">

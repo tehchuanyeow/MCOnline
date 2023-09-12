@@ -81,17 +81,17 @@ export const Navbar = () => {
 
   const downNavItems = [
     {
-      lable: "nav1",
+      lable: "Group Coaching",
       href: "/",
       icon: <MdNordicWalking />,
     },
     {
-      lable: "nav2",
+      lable: "Personal Coaching",
       href: "/",
       icon: <MdNordicWalking />,
     },
     {
-      lable: "nav3",
+      lable: "Career Coaching",
       href: "/",
       icon: <MdNordicWalking />,
     },
@@ -106,8 +106,8 @@ export const Navbar = () => {
           </Link>
           <nav
             className={`${
-              open ? "md:relative absolute flex bg-dark1" : "hidden"
-            } w-full text-white md:flex top-0 md:text-dark1 md:bg-transparent md:py-0 py-10 md:flex-row flex-col gap-5 justify-around items-center`}
+              open ? "rounded-lg md:relative absolute flex bg-dark1" : "hidden"
+            } w-full text-white md:flex top-0 md:text-dark1 md:bg-transparent md:py-0 py-10 md:flex-row flex-col gap-5 justify-around items-center z-40`}
           >
             <Dropdown menu={{ items }} className="cursor-pointer">
               <a onClick={(e) => e.preventDefault()}>
@@ -119,11 +119,31 @@ export const Navbar = () => {
             </Dropdown>
             <NavLink>Dr. Ks Guide</NavLink>
             <Link to="/upload-server">
-              <Button className="md:text-dark1 text-white">
+              <Button
+                type="btn"
+                className="bg-primary text-white hover:shadow-md"
+              >
                 Upload Server
               </Button>
             </Link>
             <NavLink>Contact</NavLink>
+            <nav className="sm:hidden w-full p-3 flex flex-col gap-5 items-center">
+              {downNavItems.map((item, index) => (
+                <Dropdown
+                  key={index}
+                  menu={{ items }}
+                  className="cursor-pointer"
+                >
+                  <a
+                    className="flex items-center gap-2"
+                    onClick={(e) => e.preventDefault()}
+                  >
+                    <i className="text-primary text-3xl">{item.icon}</i>
+                    <Space>{item.lable}</Space>
+                  </a>
+                </Dropdown>
+              ))}
+            </nav>
             <Dropdown
               className="cursor-pointer"
               menu={{ items }}
@@ -134,6 +154,7 @@ export const Navbar = () => {
                 <MdNotifications className="text-3xl" />
               </a>
             </Dropdown>
+
             {currentUser ? (
               <Dropdown
                 className="cursor-pointer"
@@ -151,7 +172,7 @@ export const Navbar = () => {
               </Dropdown>
             ) : (
               <Link to={"/login"}>
-                <Button>Login</Button>
+                <Button className="text-primary border-primary">Login</Button>
               </Link>
             )}
           </nav>
@@ -160,13 +181,13 @@ export const Navbar = () => {
             className="z-40 md:hidden text-2xl"
           >
             {open ? (
-              <SlClose className="absolute text-primary right-6 top-9 text-3xl z-20" />
+              <SlClose className="absolute text-primary right-6 top-9 text-3xl z-50" />
             ) : (
               <SlMenu className="text-black text-xl" />
             )}
           </div>
         </div>
-        <nav className="border-b w-full p-3 flex justify-between items-center">
+        <nav className="hidden border-b w-full p-3 sm:flex justify-between items-center sm:text-md text-xs">
           {downNavItems.map((item, index) => (
             <Dropdown key={index} menu={{ items }} className="cursor-pointer">
               <a

@@ -29,12 +29,12 @@ const Servers = () => {
   const swiper = useSwiper();
 
   return (
-    <div className="p-5">
+    <div className="p-5 bg-dark1">
       <div className="flex items-center">
-        <BiChevronLeft
+        {/* <BiChevronLeft
           onClick={() => swiper.slidePrev()}
           className="cursor-pointer bg-black text-white text-4xl p-1 rounded-full h-10 w-10 flex items-center justify-between"
-        />
+        /> */}
         <Swiper
           spaceBetween={2}
           slidesPerView={1}
@@ -53,21 +53,21 @@ const Servers = () => {
               spaceBetween: 2,
             },
           }}
-          className="px-10 flex-1"
+          className="px-5 flex-1"
         >
           {serverFilters.map((slideContent, index) => (
             <SwiperSlide key={index}>
-              <div className="bg-gray-900 text-white rounded px-4 py-1 text-center">
+              <div className="bg-dark2 text-white rounded px-4 py-1 text-center">
                 {slideContent}
               </div>
             </SwiperSlide>
           ))}
         </Swiper>
-
+        {/* 
         <BiChevronRight
           onClick={() => swiper.slideNext()}
           className="cursor-pointer bg-black text-white text-4xl p-1 rounded-full h-10 w-10 flex items-center justify-between"
-        />
+        /> */}
       </div>
       <ServerItems />
     </div>
