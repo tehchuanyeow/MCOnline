@@ -5,10 +5,8 @@ import Servers from "./Servers";
 export const Home = () => {
   return (
     <div className="">
-      <Container>
-        <Banner />
-        <Servers />
-      </Container>
+      <Banner />
+      <Servers />
     </div>
   );
 };

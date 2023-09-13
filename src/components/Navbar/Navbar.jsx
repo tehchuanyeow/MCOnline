@@ -1,13 +1,13 @@
 import brand from "/brand.png";
 import avatar from "/avatar.png";
-import { Container } from "../Container";
 import { SlClose, SlMenu } from "react-icons/sl";
 import { useState } from "react";
 import { Button, Dropdown, Space } from "antd";
 import { MdNordicWalking, MdNotifications, MdSmsFailed } from "react-icons/md";
-import { BiChevronDown } from "react-icons/bi";
+import { BiChevronDown, BiSolidGroup } from "react-icons/bi";
 import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { BsFillPersonFill, BsFillPersonVcardFill } from "react-icons/bs";
 
 export const Navbar = () => {
   const { currentUser, logout } = useAuth();
@@ -83,32 +83,38 @@ export const Navbar = () => {
     {
       lable: "Group Coaching",
       href: "/",
-      icon: <MdNordicWalking />,
+      icon: <BiSolidGroup />,
     },
     {
       lable: "Personal Coaching",
       href: "/",
-      icon: <MdNordicWalking />,
+      icon: <BsFillPersonFill />,
     },
     {
       lable: "Career Coaching",
       href: "/",
-      icon: <MdNordicWalking />,
+      icon: <BsFillPersonVcardFill />,
     },
   ];
 
   return (
-    <div className="dark:bg-slate-950">
-      <Container>
-        <div className="relative border-b p-4 flex items-center justify-between gap-5">
-          <Link to={"/"} className="w-14">
+    <div className="relative bg-dark1 text-white">
+      <div className="border-b border-b-dark2">
+        <div className="container mx-auto flex items-center justify-between gap-5">
+          <Link to={"/"} className="w-14 m-5">
             <img className="w-full" src={brand} alt="brand" />
           </Link>
           <nav
             className={`${
-              open ? "rounded-lg md:relative absolute flex bg-dark1" : "hidden"
-            } w-full text-white md:flex top-0 md:text-dark1 md:bg-transparent md:py-0 py-10 md:flex-row flex-col gap-5 justify-around items-center z-40`}
+              open ? "md:relative fixed h-screen flex bg-dark1" : "hidden"
+            } w-full text-white md:flex top-0 md:bg-transparent md:py-0 py-10 md:flex-row flex-col gap-5 sm:justify-around sm:items-center sm:px-0 px-10 z-40`}
           >
+            {open && (
+              <SlClose
+                onClick={() => setOpen(false)}
+                className="absolute text-primary right-5 top-5 text-3xl z-50 sm:hidden"
+              />
+            )}
             <Dropdown menu={{ items }} className="cursor-pointer">
               <a onClick={(e) => e.preventDefault()}>
                 <Space>
@@ -127,7 +133,7 @@ export const Navbar = () => {
               </Button>
             </Link>
             <NavLink>Contact</NavLink>
-            <nav className="sm:hidden w-full p-3 flex flex-col gap-5 items-center">
+            <nav className="sm:hidden w-full sm:px-0 flex flex-col gap-5 sm:items-center">
               {downNavItems.map((item, index) => (
                 <Dropdown
                   key={index}
@@ -176,31 +182,29 @@ export const Navbar = () => {
               </Link>
             )}
           </nav>
-          <div
-            onClick={() => setOpen(!open)}
-            className="z-40 md:hidden text-2xl"
-          >
-            {open ? (
-              <SlClose className="absolute text-primary right-6 top-9 text-3xl z-50" />
-            ) : (
-              <SlMenu className="text-black text-xl" />
-            )}
-          </div>
+          {!open && (
+            <SlMenu
+              onClick={() => setOpen(true)}
+              className="md:hidden m-5 text-primary text-2xl"
+            />
+          )}
         </div>
-        <nav className="hidden border-b w-full p-3 sm:flex justify-between items-center sm:text-md text-xs">
+      </div>
+      <div className="border-b border-b-dark2">
+        <nav className="container mx-auto hidden w-full p-3 sm:flex justify-between items-center sm:text-md text-xs">
           {downNavItems.map((item, index) => (
             <Dropdown key={index} menu={{ items }} className="cursor-pointer">
               <a
                 className="flex items-center gap-2"
                 onClick={(e) => e.preventDefault()}
               >
-                <i className="text-primary text-3xl">{item.icon}</i>
+                <i className="text-3xl">{item.icon}</i>
                 <Space>{item.lable}</Space>
               </a>
             </Dropdown>
           ))}
         </nav>
-      </Container>
+      </div>
     </div>
   );
 };

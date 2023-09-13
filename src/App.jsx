@@ -9,9 +9,9 @@ function App() {
       <ConfigProvider
         theme={{
           token: {
-            colorPrimary: "#22c55e",
+            colorPrimary: "#FF0000",
             borderRadius: 5,
-            colorBgContainer: "#f6ffed",
+            colorBgContainer: "#FF0000",
           },
         }}
       >
