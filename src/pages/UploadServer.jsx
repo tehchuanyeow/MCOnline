@@ -1,6 +1,6 @@
 import { UploadOutlined } from "@ant-design/icons";
 import { Button, message, Upload } from "antd";
-import { InboxOutlined } from "@ant-design/icons";
+import { RiDragDropFill } from "react-icons/ri";
 const { Dragger } = Upload;
 import { Select } from "antd";
 import { Container } from "../components/Container";
@@ -48,50 +48,54 @@ const UploadServer = () => {
   };
 
   return (
-    <Container>
-      <div className="p-5">
-        <h1 className="mb-10 text-3xl font-semibold">Create New</h1>
-        <Upload style={{ margin: "10px 0" }} {...props}>
-          <Button icon={<UploadOutlined />}>Click to Upload</Button>
-        </Upload>
-        <Dragger style={{ margin: "10px 0" }} {...propsDragger}>
-          <p className="ant-upload-drag-icon">
-            <InboxOutlined />
-          </p>
-          <p className="ant-upload-text">
-            Click or drag file to this area to upload
-          </p>
-          <p className="ant-upload-hint">
-            Support for a single or bulk upload. Strictly prohibited from
-            uploading company data or other banned files.
-          </p>
-        </Dragger>
-        <div className="flex gap-2 my-10">
-          <div>
-            <h6>Project Location</h6>
-            <Select
-              defaultValue="lucy"
-              className="w-96 mt-2"
-              onChange={handleChange}
-              options={[
-                { value: "jack", label: "Jack" },
-                { value: "lucy", label: "Lucy" },
-                { value: "Yiminghe", label: "yiminghe" },
-                { value: "disabled", label: "Disabled", disabled: true },
-              ]}
-            />
+    <div className="bg-dark2 text-white min-h-screen">
+      <Container>
+        <div className="p-5">
+          <h1 className="mb-10 text-3xl font-semibold">Create New</h1>
+          <Upload style={{ margin: "10px 0" }} {...props}>
+            <Button className="text-white" icon={<UploadOutlined />}>
+              Click to Upload
+            </Button>
+          </Upload>
+          <Dragger style={{ margin: "10px 0" }} {...propsDragger}>
+            <p className="flex justify-center text-6xl mb-10 text-white">
+              <RiDragDropFill />
+            </p>
+            <p className="text-white text-xl">
+              Click or drag file to this area to upload
+            </p>
+            <p className="text-white">
+              Support for a single or bulk upload. Strictly prohibited from
+              uploading company data or other banned files.
+            </p>
+          </Dragger>
+          <div className="flex gap-2 my-10">
+            <div>
+              <h6>Project Location</h6>
+              <Select
+                defaultValue="jack"
+                className="w-96 mt-2"
+                onChange={handleChange}
+                options={[
+                  { value: "jack", label: "Jack" },
+                  { value: "lucy", label: "Lucy" },
+                  { value: "Yiminghe", label: "yiminghe" },
+                  { value: "disabled", label: "Disabled", disabled: true },
+                ]}
+              />
+            </div>
+            <div>
+              <h6>Communication Name (optional)</h6>
+              <input
+                type="text"
+                className="mt-2 rounded border-gray-300 w-full border p-1"
+              />
+            </div>
           </div>
-          <div>
-            <h6>Communication Name (optional)</h6>
-            <input
-              type="text"
-              className="mt-2 rounded border-gray-300 w-full border p-1"
-            />
-          </div>
+          <Button className="text-white">Create</Button>
         </div>
-        <Button>Create</Button>
-      </div>
-    </Container>
+      </Container>
+    </div>
   );
 };
 

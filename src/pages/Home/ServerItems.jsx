@@ -196,7 +196,7 @@ const ServerItems = () => {
 
   return (
     <div>
-      <div className="p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="p-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
         {items.map((server) => (
           <ServerCard
             showModal={showModal}
@@ -207,7 +207,7 @@ const ServerItems = () => {
       </div>
       <Modal
         onCancel={closeModal}
-        width={"80%"}
+        width={1000}
         title="Basic Modal"
         open={isModalOpen}
         footer={null}

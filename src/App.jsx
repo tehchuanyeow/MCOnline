@@ -12,6 +12,7 @@ function App() {
             colorPrimary: "#FF0000",
             borderRadius: 5,
             colorBgContainer: "#FF0000",
+            controlOutline: "none",
           },
         }}
       >

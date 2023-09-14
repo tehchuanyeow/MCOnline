@@ -2,10 +2,10 @@ import { Container } from "../../components/Container";
 
 const Voting = () => {
   return (
-    <div className="flex items-center justify-center min-h-[80vh] p-10">
+    <div className="flex items-center justify-center min-h-screen p-10 bg-dark2 text-white">
       <Container>
         <div>
-          <div>
+          <div className="text-center">
             <h6 className="md:text-3xl font-bold">
               Cast Daily Vote for Minecraft Server:
             </h6>
@@ -30,7 +30,7 @@ const Voting = () => {
               placeholder="Minecradt Name"
             />
             <h6 className="text-smn text-center">Username is CaSe-SeNsiTive</h6>
-            <button className="rounded block mt-5 uppercase bg-blue-900 py-2 px-6 w-fit mx-auto">
+            <button className="rounded block mt-5 uppercase bg-primary py-2 px-6 w-fit mx-auto">
               Submit Vote!
             </button>
           </div>
