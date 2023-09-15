@@ -1,4 +1,4 @@
-import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
 import "swiper/css";
@@ -27,7 +27,6 @@ const serverFilters = [
 ];
 
 const Servers = () => {
-  const swiper = useSwiper();
   const [selectedFilter, setSelctedFilter] = useState("all");
 
   return (
