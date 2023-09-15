@@ -3,7 +3,15 @@ import avatar from "/avatar.png";
 import { SlClose, SlMenu } from "react-icons/sl";
 import { useState } from "react";
 import { Button, Dropdown, Space } from "antd";
-import { MdNordicWalking, MdNotifications, MdSmsFailed } from "react-icons/md";
+import {
+  MdAdd,
+  MdHome,
+  MdHowToVote,
+  MdNordicWalking,
+  MdNotifications,
+  MdPerson,
+  MdSmsFailed,
+} from "react-icons/md";
 import { BiChevronDown, BiSolidGroup } from "react-icons/bi";
 import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
@@ -204,6 +212,23 @@ export const Navbar = () => {
             </Dropdown>
           ))}
         </nav>
+      </div>
+      <div className="md:hidden fixed flex justify-around items-center bottom-0 bg-dark1 p-2 w-full">
+        <Link to={"/"}>
+          <MdHome className="p-1 text-4xl rounded-lg" />
+        </Link>
+        <Link to={"/voting"}>
+          <MdHowToVote className="p-1 text-3xl rounded-lg" />
+        </Link>
+        <Link to={"/upload-server"}>
+          <MdAdd className="border p-1 text-3xl rounded-lg" />
+        </Link>
+        <Link to={"/"}>
+          <MdNotifications className="p-1 text-3xl" />
+        </Link>
+        <Link to={"user-profile"}>
+          <MdPerson className="border p-1 text-3xl rounded-full" />
+        </Link>
       </div>
     </div>
   );

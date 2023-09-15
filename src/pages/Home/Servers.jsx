@@ -38,7 +38,7 @@ const Servers = () => {
             color="white"
             breakpoints={{
               240: {
-                slidesPerView: 2,
+                slidesPerView: 3,
                 spaceBetween: 2,
               },
               768: {
