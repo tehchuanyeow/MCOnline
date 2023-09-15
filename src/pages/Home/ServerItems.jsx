@@ -1,3 +1,6 @@
+import thumb1 from "../../assets/thumb-1.jpg";
+import thumb2 from "../../assets/thumb-2.jpg";
+import thumb3 from "../../assets/thumb-3.jpg";
 import { Modal } from "antd";
 import ServerCard from "./ServerCard";
 import { useState } from "react";
@@ -9,122 +12,100 @@ import { LuServerCrash } from "react-icons/lu";
 const items = [
   {
     id: 1,
-    thumbnail:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
+    thumbnail: thumb1,
     title: "Server Title",
     serverName: "Server Name",
-    serverImage:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
+    serverImage: thumb3,
     views: 224,
     uploadeAt: "5/8/2023",
   },
   {
     id: 2,
-    thumbnail:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
+    thumbnail: thumb2,
     title: "Server Title",
     serverName: "Server Name",
-    serverImage:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
+    serverImage: thumb3,
     views: 224,
     uploadeAt: "5/8/2023",
   },
   {
     id: 3,
-    thumbnail:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
+    thumbnail: thumb3,
     title: "Server Title",
     serverName: "Server Name",
-    serverImage:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
+    serverImage: thumb3,
     views: 224,
     uploadeAt: "5/8/2023",
   },
   {
     id: 4,
-    thumbnail:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
+    thumbnail: thumb1,
     title: "Server Title",
     serverName: "Server Name",
-    serverImage:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
+    serverImage: thumb3,
     views: 224,
     uploadeAt: "5/8/2023",
   },
   {
     id: 5,
-    thumbnail:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
+    thumbnail: thumb2,
     title: "Server Title",
     serverName: "Server Name",
-    serverImage:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
+    serverImage: thumb3,
     views: 224,
     uploadeAt: "5/8/2023",
   },
   {
     id: 6,
-    thumbnail:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
+    thumbnail: thumb3,
     title: "Server Title",
     serverName: "Server Name",
-    serverImage:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
+    serverImage: thumb3,
     views: 224,
     uploadeAt: "5/8/2023",
   },
   {
     id: 7,
-    thumbnail:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
+    thumbnail: thumb1,
     title: "Server Title",
     serverName: "Server Name",
-    serverImage:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
+    serverImage: thumb3,
     views: 224,
     uploadeAt: "5/8/2023",
   },
   {
     id: 8,
-    thumbnail:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
+    thumbnail: thumb2,
     title: "Server Title",
     serverName: "Server Name",
-    serverImage:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
+    serverImage: thumb3,
     views: 224,
     uploadeAt: "5/8/2023",
   },
   {
     id: 9,
-    thumbnail:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
+    thumbnail: thumb3,
     title: "Server Title",
     serverName: "Server Name",
-    serverImage:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
+    serverImage: thumb3,
     views: 224,
     uploadeAt: "5/8/2023",
   },
   {
     id: 10,
-    thumbnail:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
+    thumbnail: thumb1,
     title: "Server Title",
     serverName: "Server Name",
-    serverImage:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
+    serverImage: thumb3,
     views: 224,
     uploadeAt: "5/8/2023",
   },
   {
     id: 11,
-    thumbnail:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
+    thumbnail: thumb2,
     title: "Server Title",
     serverName: "Server Name",
-    serverImage:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
+    serverImage: thumb3,
     views: 224,
     uploadeAt: "5/8/2023",
   },
@@ -132,50 +113,43 @@ const items = [
 
 const comments = [
   {
-    serverImage:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
+    serverImage: thumb3,
     serverName: "Julia HG",
     comment:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, dolor. Omnis sapiente atque qui nobis nisi, sed rerum quaerat harum.",
   },
   {
-    serverImage:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
+    serverImage: thumb3,
     serverName: "Julia HG",
     comment:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, dolor. Omnis sapiente atque qui nobis nisi, sed rerum quaerat harum.",
   },
   {
-    serverImage:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
+    serverImage: thumb3,
     serverName: "Julia HG",
     comment:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, dolor. Omnis sapiente atque qui nobis nisi, sed rerum quaerat harum.",
   },
   {
-    serverImage:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
+    serverImage: thumb3,
     serverName: "Julia HG",
     comment:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, dolor. Omnis sapiente atque qui nobis nisi, sed rerum quaerat harum.",
   },
   {
-    serverImage:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
+    serverImage: thumb3,
     serverName: "Julia HG",
     comment:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, dolor. Omnis sapiente atque qui nobis nisi, sed rerum quaerat harum.",
   },
   {
-    serverImage:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
+    serverImage: thumb3,
     serverName: "Julia HG",
     comment:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, dolor. Omnis sapiente atque qui nobis nisi, sed rerum quaerat harum.",
   },
   {
-    serverImage:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
+    serverImage: thumb3,
     serverName: "Julia HG",
     comment:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, dolor. Omnis sapiente atque qui nobis nisi, sed rerum quaerat harum.",
