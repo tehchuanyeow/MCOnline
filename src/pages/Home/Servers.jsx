@@ -6,6 +6,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import ServerItems from "./ServerItems";
 import { Container } from "../../components/Container";
+import { useState } from "react";
 
 const serverFilters = [
   "All",
@@ -27,6 +28,7 @@ const serverFilters = [
 
 const Servers = () => {
   const swiper = useSwiper();
+  const [selectedFilter, setSelctedFilter] = useState("all");
 
   return (
     <div className="py-5 bg-dark1">
@@ -37,24 +39,33 @@ const Servers = () => {
             slidesPerView={1}
             color="white"
             breakpoints={{
-              240: {
-                slidesPerView: 3,
-                spaceBetween: 2,
+              340: {
+                slidesPerView: 4,
+                spaceBetween: 5,
               },
               768: {
                 slidesPerView: 7,
-                spaceBetween: 2,
+                spaceBetween: 5,
               },
               1024: {
                 slidesPerView: 10,
-                spaceBetween: 2,
+                spaceBetween: 5,
               },
             }}
             className="px-5 flex-1"
           >
             {serverFilters.map((slideContent, index) => (
               <SwiperSlide key={index}>
-                <div className="bg-dark2 text-white rounded px-4 py-1 text-center">
+                <div
+                  onClick={() =>
+                    setSelctedFilter(slideContent.toLocaleLowerCase())
+                  }
+                  className={`${
+                    selectedFilter === slideContent.toLocaleLowerCase()
+                      ? "text-dark2 bg-white"
+                      : "bg-dark2 text-white"
+                  } cursor-pointer rounded px-4 py-1 text-center`}
+                >
                   {slideContent}
                 </div>
               </SwiperSlide>

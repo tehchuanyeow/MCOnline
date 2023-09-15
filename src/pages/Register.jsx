@@ -6,6 +6,7 @@ import axios from "axios";
 import { Toaster, toast } from "react-hot-toast";
 import { useAuth } from "../context/AuthContext";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 export const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -75,10 +76,12 @@ export const Register = () => {
   };
 
   return (
-    <div className="dark:bg-gray-900 text-slate-700 dark:text-white min-h-[85vh] flex items-center justify-center">
+    <div className="bg-dark2 text-dark1 min-h-[85vh] flex items-center justify-center">
       <Toaster position="top-center" reverseOrder={false} />
-      <div className="px-5 py-10 lg:w-1/2">
-        <h2 className="text-3xl font-bold mb-8 text-center">Registration</h2>
+      <div className="px-5 py-10 w-full md:w-1/2">
+        <h2 className="text-3xl font-bold mb-8 text-center text-white">
+          Registration
+        </h2>
         <form
           onSubmit={handleSubmit(registerHandler)}
           className="md:grid grid-cols-2 gap-x-6 bg-gray-200 dark:bg-gray-800 p-10 rounded shadow-lg"
@@ -234,6 +237,9 @@ export const Register = () => {
             value={loading ? "Please Wait..." : "Register"}
           />
         </form>
+        <Link className="my-10 block underline text-white text-center">
+          Already Have an Account? Log in
+        </Link>
       </div>
     </div>
   );

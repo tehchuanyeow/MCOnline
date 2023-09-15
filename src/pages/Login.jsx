@@ -35,11 +35,11 @@ export const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-[85vh] dark:bg-slate-900">
+    <div className="flex items-center justify-center h-[85vh] bg-dark2">
       <Toaster position="top-center" reverseOrder={false} />
 
       <div className="w-full lg:w-1/3 md:w-2/3 p-5">
-        <h2 className="text-3xl font-bold mb-8 text-center dark:text-white text-black">
+        <h2 className="text-3xl font-bold mb-8 text-center text-white">
           Login
         </h2>
         <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-200 border-0 text-slate-700 p-5">
@@ -138,15 +138,18 @@ export const Login = () => {
             </form>
           </div>
         </div>
-        <div className="flex flex-wrap mt-6 dark:text-white">
+        <div className="flex flex-wrap mt-6 text-white">
           <div className="w-1/2">
             <a href="#pablo" onClick={(e) => e.preventDefault()}>
-              <small>Forgot password?</small>
+              <small className="underline">Forgot password?</small>
             </a>
           </div>
           <div className="w-1/2 text-right">
             <a href="#pablo" onClick={(e) => e.preventDefault()}>
-              <small onClick={() => navigate("/register")}>
+              <small
+                className="underline"
+                onClick={() => navigate("/register")}
+              >
                 Create new account
               </small>
             </a>

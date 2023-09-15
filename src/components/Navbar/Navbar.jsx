@@ -106,16 +106,17 @@ export const Navbar = () => {
   ];
 
   return (
-    <div className="relative bg-dark1 text-white">
+    <div className="sticky top-0 bg-dark1 text-white z-50">
       <div className="border-b border-b-dark2">
         <div className="container mx-auto flex items-center justify-between gap-5">
-          <Link to={"/"} className="w-14 m-5">
-            <img className="w-full" src={brand} alt="brand" />
+          <Link to={"/"} className="text-lg font-bold m-5">
+            {/* <img className="w-full" src={brand} alt="brand" /> */}
+            SiteName
           </Link>
           <nav
             className={`${
-              open ? "md:relative fixed h-screen flex bg-dark1" : "hidden"
-            } w-full text-white md:flex top-0 md:bg-transparent md:py-0 py-10 md:flex-row flex-col gap-5 sm:justify-around sm:items-center sm:px-0 px-10 z-40`}
+              open ? "fixed h-screen flex bg-dark1" : "hidden"
+            } w-full text-white md:flex top-0 md:bg-transparent md:py-0 py-10 md:flex-row flex-col gap-5 sm:justify-around sm:items-center sm:px-0 px-10`}
           >
             {open && (
               <SlClose
@@ -158,16 +159,18 @@ export const Navbar = () => {
                 </Dropdown>
               ))}
             </nav>
-            <Dropdown
-              className="cursor-pointer"
-              menu={{ items }}
-              trigger={["click"]}
-              placement="bottomRight"
-            >
-              <a onClick={(e) => e.preventDefault()}>
-                <MdNotifications className="text-3xl" />
-              </a>
-            </Dropdown>
+            <div className="sm:block hidden">
+              <Dropdown
+                className="cursor-pointer"
+                menu={{ items }}
+                trigger={["click"]}
+                placement="bottomRight"
+              >
+                <a onClick={(e) => e.preventDefault()}>
+                  <MdNotifications className="text-3xl" />
+                </a>
+              </Dropdown>
+            </div>
 
             {currentUser ? (
               <Dropdown
@@ -191,10 +194,25 @@ export const Navbar = () => {
             )}
           </nav>
           {!open && (
-            <SlMenu
-              onClick={() => setOpen(true)}
-              className="md:hidden m-5 text-primary text-2xl"
-            />
+            <div className="flex items-center sm:hidden">
+              <Dropdown
+                className="cursor-pointer"
+                menu={{ items }}
+                trigger={["click"]}
+                placement="bottomRight"
+              >
+                <a onClick={(e) => e.preventDefault()}>
+                  <MdNotifications className="text-3xl" />
+                </a>
+              </Dropdown>
+
+              <img
+                onClick={() => setOpen(true)}
+                className="m-5 w-8 h-8 rounded-full border border-black"
+                src={currentUser?.photoURL ? currentUser.photoURL : avatar}
+                alt=""
+              />
+            </div>
           )}
         </div>
       </div>
