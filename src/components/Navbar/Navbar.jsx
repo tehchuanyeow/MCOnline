@@ -110,7 +110,6 @@ export const Navbar = () => {
       <div className="border-b border-b-dark2">
         <div className="container mx-auto flex items-center justify-between gap-5">
           <Link to={"/"} className="text-lg font-bold m-5">
-            {/* <img className="w-full" src={brand} alt="brand" /> */}
             SiteName
           </Link>
           <nav

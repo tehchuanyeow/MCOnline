@@ -157,7 +157,7 @@ const comments = [
   },
 ];
 
-const ServerItems = () => {
+const ServerItems = ({ filter }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalActiveItem, setModalActiveItem] = useState(1);
 

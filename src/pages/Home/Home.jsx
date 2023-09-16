@@ -1,4 +1,3 @@
-import { Container } from "../../components/Container";
 import Banner from "./Banner";
 import Servers from "./Servers";
 
