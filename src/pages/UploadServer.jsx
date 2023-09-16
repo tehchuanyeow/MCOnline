@@ -69,20 +69,18 @@ const UploadServer = () => {
               uploading company data or other banned files.
             </p>
           </Dragger>
-          <div className="flex gap-2 my-10">
+          <div className="flex md:flex-row flex-col gap-2 my-10">
             <div>
               <h6>Project Location</h6>
-              <Select
-                defaultValue="jack"
-                className="w-96 mt-2"
+              <select
+                className="md:w-80 w-full md:p-1 p-1.5 rounded mt-2 text-dark1"
                 onChange={handleChange}
-                options={[
-                  { value: "jack", label: "Jack" },
-                  { value: "lucy", label: "Lucy" },
-                  { value: "Yiminghe", label: "yiminghe" },
-                  { value: "disabled", label: "Disabled", disabled: true },
-                ]}
-              />
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
             </div>
             <div>
               <h6>Communication Name (optional)</h6>

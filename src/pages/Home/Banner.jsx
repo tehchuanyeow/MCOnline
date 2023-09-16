@@ -2,7 +2,7 @@ import thumb1 from "../../assets/thumb-1.jpg";
 import thumb2 from "../../assets/thumb-2.jpg";
 import thumb3 from "../../assets/thumb-3.jpg";
 import { Container } from "../../components/Container";
-import { Swiper, SwiperSlide, useSwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
 import "swiper/css";
@@ -73,7 +73,7 @@ const Banner = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalActiveItem, setModalActiveItem] = useState(1);
 
-  const [thumbsSwiper, setThumbsSwiper] = useState(0);
+  const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -93,6 +93,7 @@ const Banner = () => {
             delay: 4000,
             disableOnInteraction: false,
           }}
+          loop={true}
           spaceBetween={10}
           navigation={true}
           thumbs={{
@@ -114,6 +115,7 @@ const Banner = () => {
           ))}
         </Swiper>
         <Swiper
+          loop={true}
           slideToClickedSlide={true}
           onSwiper={setThumbsSwiper}
           spaceBetween={20}
@@ -132,7 +134,7 @@ const Banner = () => {
           freeMode={true}
           watchSlidesProgress={true}
           modules={[FreeMode, Navigation, Thumbs]}
-          className="mySwipper mt-10"
+          className="mySwiper mt-10"
         >
           {topServers.map((server, index) => (
             <SwiperSlide key={index}>
@@ -140,9 +142,7 @@ const Banner = () => {
                 onClick={() => setSelectedThumbs(index)}
                 src={server.thumbnail}
                 alt="slide1"
-                className={`${
-                  selectedThumbs === index ? "opacity-100" : "opacity-40"
-                }  w-full border-4 h-32 transition-all duration-500 object-cover cursor-pointer rounded-2xl`}
+                className={`w-full border-4 h-32 transition-all duration-500 object-cover cursor-pointer rounded-2xl`}
               />
             </SwiperSlide>
           ))}

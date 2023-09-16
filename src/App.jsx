@@ -8,6 +8,11 @@ function App() {
     <AuthProvider>
       <ConfigProvider
         theme={{
+          components: {
+            Select: {
+              colorBgContainer: "#ffffff",
+            },
+          },
           token: {
             colorPrimary: "#FF0000",
             borderRadius: 5,
