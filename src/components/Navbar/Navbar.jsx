@@ -13,7 +13,7 @@ import {
   MdSmsFailed,
 } from "react-icons/md";
 import { BiChevronDown, BiSolidGroup } from "react-icons/bi";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { BsFillPersonFill, BsFillPersonVcardFill } from "react-icons/bs";
 
@@ -104,6 +104,16 @@ export const Navbar = () => {
       icon: <BsFillPersonVcardFill />,
     },
   ];
+
+  const location = useLocation();
+
+  const handleHomeLinkClick = () => {
+    // Check if the user is already on the home route
+    if (location.pathname === "/") {
+      // Scroll to the top of the page
+      window.scrollTo(0, 0);
+    }
+  };
 
   return (
     <div className="sticky top-0 bg-dark1 text-white z-50">
@@ -230,8 +240,10 @@ export const Navbar = () => {
           ))}
         </nav>
       </div>
+
+      {/* Bottom Navbar */}
       <div className="md:hidden fixed flex justify-around items-center bottom-0 bg-dark1 p-2 w-full">
-        <Link to={"/"}>
+        <Link to={"/"} onClick={handleHomeLinkClick}>
           <MdHome className="p-1 text-4xl rounded-lg" />
         </Link>
         <Link to={"/voting"}>

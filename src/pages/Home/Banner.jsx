@@ -109,7 +109,7 @@ const Banner = () => {
                 onClick={showModal}
                 src={server.thumbnail}
                 alt="slide1"
-                className="w-full md:h-96 h-60 object-cover cursor-pointer rounded-2xl"
+                className="w-full md:h-96 h-40 object-cover cursor-pointer rounded-2xl"
               />
             </SwiperSlide>
           ))}
@@ -118,19 +118,8 @@ const Banner = () => {
           loop={true}
           slideToClickedSlide={true}
           onSwiper={setThumbsSwiper}
-          spaceBetween={20}
-          slidesPerView={2}
-          breakpoints={{
-            500: {
-              slidesPerView: 3,
-            },
-            600: {
-              slidesPerView: 4,
-            },
-            1080: {
-              slidesPerView: 5,
-            },
-          }}
+          spaceBetween={5}
+          slidesPerView={topServers.length}
           freeMode={true}
           watchSlidesProgress={true}
           modules={[FreeMode, Navigation, Thumbs]}
@@ -142,7 +131,7 @@ const Banner = () => {
                 onClick={() => setSelectedThumbs(index)}
                 src={server.thumbnail}
                 alt="slide1"
-                className={`w-full border-4 h-32 transition-all duration-500 object-cover cursor-pointer rounded-2xl`}
+                className={`w-full border-2 md:h-32 h-12 transition-all duration-500 object-cover cursor-pointer rounded-2xl`}
               />
             </SwiperSlide>
           ))}

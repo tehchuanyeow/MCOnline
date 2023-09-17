@@ -5,6 +5,7 @@
 * {
   font-family: "Poppins", sans-serif;
   --swiper-navigation-color: black;
+  scroll-behavior: smooth;
 }
 
 .swiper-button-next,
