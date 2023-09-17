@@ -145,6 +145,7 @@ export const Navbar = () => {
             <Link to="/upload-server">
               <Button
                 type="btn"
+                onClick={() => setOpen(false)}
                 className="bg-primary text-white hover:shadow-md"
               >
                 Upload Server
@@ -198,7 +199,9 @@ export const Navbar = () => {
               </Dropdown>
             ) : (
               <Link to={"/login"}>
-                <Button className="text-primary border-primary">Login</Button>
+                <Button
+                onClick={() => setOpen(false)}
+                className="text-primary border-primary">Login</Button>
               </Link>
             )}
           </nav>
