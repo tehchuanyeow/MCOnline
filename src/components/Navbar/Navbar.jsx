@@ -1,4 +1,4 @@
-import brand from "/brand.png";
+import brand from "/MCOnline Logo.png";
 import avatar from "/avatar.png";
 import { SlClose, SlMenu } from "react-icons/sl";
 import { useState } from "react";
@@ -120,7 +120,7 @@ export const Navbar = () => {
       <div className="border-b border-b-dark2">
         <div className="container mx-auto flex items-center justify-between gap-5">
           <Link to={"/"} className="text-lg font-bold m-5">
-            SiteName
+            <img src={brand} alt="MCOnline Logo" className="w-20 h-20" />
           </Link>
           <nav
             className={`${

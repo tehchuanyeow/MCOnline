@@ -7,21 +7,9 @@ import "swiper/css/navigation";
 import { Button } from "antd";
 
 const serverFilters = [
-  "All",
-  "filter1",
-  "filter2",
-  "filter3",
-  "filter4",
-  "filter5",
-  "filter6",
-  "filter7",
-  "filter8",
-  "filter9",
-  "filter10",
-  "filter11",
-  "filter12",
-  "filter13",
-  "filter14",
+  "Cross-Play",
+  "Java",
+  "Bedrock",
 ];
 
 const Filters = ({ selectedFilter, handleSelectedFilter, resetFilter }) => {
