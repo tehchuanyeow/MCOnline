@@ -15,10 +15,12 @@ const serverFilters = [
 const Filters = ({ selectedFilter, handleSelectedFilter, resetFilter }) => {
   return (
     <div className="px-5">
-      <Button onClick={resetFilter} className="mb-5 text-white">
-        Reset All
-      </Button>
       <div className="flex items-center">
+        <div className="flex items-left">
+          <Button onClick={resetFilter} className="mb-5 text-white">
+            Reset All
+          </Button>
+        </div>
         <Swiper
           spaceBetween={2}
           slidesPerView={1}

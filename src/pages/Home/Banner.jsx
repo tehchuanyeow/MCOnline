@@ -65,8 +65,7 @@ const topServers = [
   { thumbnail: thumb2 },
   { thumbnail: thumb3 },
   { thumbnail: thumb1 },
-  { thumbnail: thumb2 },
-  { thumbnail: thumb3 },
+  { thumbnail: thumb2 }
 ];
 
 const Banner = () => {
