@@ -18,7 +18,7 @@ const Servers = () => {
     }
   };
 
-  const resetHandler = () => setSelectedFilter(["all"]);
+  const resetHandler = () => setSelectedFilter(["Cross-Play"]);
 
   return (
     <div className="py-5 bg-dark2">
