@@ -1,7 +1,6 @@
 import brand from "/MCOnline Logo.png";
 import avatar from "/avatar.png";
-import { SlClose, SlMenu } from "react-icons/sl";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button, Dropdown, Space } from "antd";
 import {
   MdAdd,
@@ -16,10 +15,50 @@ import { BiChevronDown, BiSolidGroup } from "react-icons/bi";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { BsFillPersonFill, BsFillPersonVcardFill } from "react-icons/bs";
+import { Avatar, Tooltip } from '@mui/material';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import HomeIcon from '@mui/icons-material/Home';
+import HowToVoteIcon from '@mui/icons-material/HowToVote';
+import AddIcon from '@mui/icons-material/Add';
+import PersonIcon from '@mui/icons-material/Person';
+import Drawer from '@mui/material/Drawer';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import Badge from '@mui/material/Badge';
 
 export const Navbar = () => {
+  const notificationCount = 2;
   const { currentUser, logout } = useAuth();
   const [open, setOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  // State to track the screen width
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  const handleResize = () => {
+    setScreenWidth(window.innerWidth);
+  };
+
+  useEffect(() => {
+    // Add event listener for window resize
+    window.addEventListener('resize', handleResize);
+
+    // Remove event listener when component unmounts
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const items = [
     {
@@ -120,28 +159,27 @@ export const Navbar = () => {
       <div className="border-b border-b-dark2">
         <div className="container mx-auto flex items-center justify-between gap-5">
           <Link to={"/"} className="text-lg font-bold m-5">
-            <img src={brand} alt="MCOnline Logo" className="w-20 h-20" />
+            <Avatar src={brand} alt="MCOnline Logo" className="w-20 h-20" />
           </Link>
-          <nav
-            className={`${
-              open ? "fixed h-screen flex bg-dark1" : "hidden"
-            } w-full text-white md:flex top-0 md:bg-transparent md:py-0 py-10 md:flex-row flex-col gap-5 sm:justify-around sm:items-center sm:px-0 px-10`}
-          >
-            {open && (
-              <SlClose
-                onClick={() => setOpen(false)}
-                className="absolute text-primary right-5 top-5 text-3xl z-50 sm:hidden"
-              />
-            )}
+          <nav className={`${ open ? "flex" : "hidden" } sm:flex sm:items-center sm:gap-5`}>
+          {open && (
+            <Tooltip title="Close Menu" placement="right" onClick={handleMenuOpen}>
+              <button className="text-primary hover:text-white focus:outline-none">
+              <Badge color="secondary" badgeContent={2}>
+                <NotificationsIcon />
+                </Badge>
+              </button>
+            </Tooltip>
+          )}
             <Dropdown menu={{ items }} className="cursor-pointer">
               <a onClick={(e) => e.preventDefault()}>
                 <Space>
-                  HG Coaching
+                  Community
                   <BiChevronDown />
                 </Space>
               </a>
             </Dropdown>
-            <NavLink>Dr. Ks Guide</NavLink>
+            <NavLink>Sponsors</NavLink>
             <Link to="/upload-server">
               <Button
                 type="btn"
@@ -151,75 +189,32 @@ export const Navbar = () => {
                 Upload Server
               </Button>
             </Link>
-            <NavLink>Contact</NavLink>
-            <nav className="sm:hidden w-full sm:px-0 flex flex-col gap-5 sm:items-center">
-              {downNavItems.map((item, index) => (
-                <Dropdown
-                  key={index}
-                  menu={{ items }}
-                  className="cursor-pointer"
-                >
-                  <a
-                    className="flex items-center gap-2"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    <i className="text-primary text-3xl">{item.icon}</i>
-                    <Space>{item.lable}</Space>
-                  </a>
-                </Dropdown>
-              ))}
-            </nav>
-            <div className="sm:block hidden">
-              <Dropdown
-                className="cursor-pointer"
-                menu={{ items }}
-                trigger={["click"]}
-                placement="bottomRight"
-              >
-                <a onClick={(e) => e.preventDefault()}>
-                  <MdNotifications className="text-3xl" />
-                </a>
-              </Dropdown>
-            </div>
 
-            {currentUser ? (
-              <Dropdown
-                className="cursor-pointer"
-                menu={{ items: profileItems }}
-                trigger={["click"]}
-                placement="bottomRight"
-              >
-                <a onClick={(e) => e.preventDefault()}>
-                  <img
-                    className="w-10 h-10 rounded-full border border-black"
-                    src={currentUser?.photoURL ? currentUser.photoURL : avatar}
-                    alt=""
-                  />
-                </a>
-              </Dropdown>
-            ) : (
-              <Link to={"/login"}>
-                <Button
-                onClick={() => setOpen(false)}
-                className="text-primary border-primary">Login</Button>
-              </Link>
-            )}
+            <Tooltip title="Notifications" placement="top" onClick={handleMenuOpen}>
+              <div className="cursor-pointer">
+              <Badge color="secondary" badgeContent={2}>
+                <NotificationsIcon className="text-3xl" />
+                </Badge>
+              </div>
+            </Tooltip>
+
+            <Avatar
+                onClick={() => setIsDrawerOpen(true)}
+                className="m-5 w-8 h-8 rounded-full border border-black"
+                src={currentUser?.photoURL ? currentUser.photoURL : avatar}
+                alt=""
+              />
           </nav>
           {!open && (
             <div className="flex items-center sm:hidden">
-              <Dropdown
-                className="cursor-pointer"
-                menu={{ items }}
-                trigger={["click"]}
-                placement="bottomRight"
-              >
-                <a onClick={(e) => e.preventDefault()}>
-                  <MdNotifications className="text-3xl" />
-                </a>
-              </Dropdown>
+              <Tooltip title="Notifications" placement="left" onClick={handleMenuOpen}>
+              <Badge color="primary" badgeContent={2}>
+                <NotificationsIcon className="text-3xl cursor-pointer" />
+                </Badge>
+              </Tooltip>
 
               <img
-                onClick={() => setOpen(true)}
+                onClick={() => setIsDrawerOpen(true)}
                 className="m-5 w-8 h-8 rounded-full border border-black"
                 src={currentUser?.photoURL ? currentUser.photoURL : avatar}
                 alt=""
@@ -244,24 +239,79 @@ export const Navbar = () => {
         </nav>
       </div>
 
+            {/* User Profile Drawer */}
+            <Drawer
+        anchor="right"
+        open={isDrawerOpen}
+        onClose={() => setIsDrawerOpen(false)}
+      >
+        {/* Add your user profile content here */}
+        <div style={{ width: '250px', padding: '20px' }}>
+          {/* User profile content */}
+          <h2>User Profile</h2>
+          {/* Add your user profile information here */}
+        </div>
+      </Drawer>
+
+            {/* User Profile Menu */}
+            <Menu
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={handleMenuClose}
+      >
+        <MenuItem onClick={handleMenuClose}>
+          <Link to="/user-profile">Profile</Link>
+        </MenuItem>
+        <MenuItem onClick={handleMenuClose}>
+          <button
+            onClick={logout}
+            type="button"
+          >
+            Logout
+          </button>
+        </MenuItem>
+      </Menu>
+
       {/* Bottom Navbar */}
-      <div className="md:hidden fixed flex justify-around items-center bottom-0 bg-dark1 p-2 w-full">
-        <Link to={"/"} onClick={handleHomeLinkClick}>
-          <MdHome className="p-1 text-4xl rounded-lg" />
-        </Link>
-        <Link to={"/voting"}>
-          <MdHowToVote className="p-1 text-3xl rounded-lg" />
-        </Link>
-        <Link to={"/upload-server"}>
-          <MdAdd className="border p-1 text-3xl rounded-lg" />
-        </Link>
-        <Link to={"/"}>
-          <MdNotifications className="p-1 text-3xl" />
-        </Link>
-        <Link to={"user-profile"}>
-          <MdPerson className="border p-1 text-3xl rounded-full" />
-        </Link>
-      </div>
+      {screenWidth <= 768 && (
+        <BottomNavigation
+          onChange={(event, newValue) => {
+            setValue(newValue);
+          }}
+          showLabels
+          className="md:hidden fixed flex justify-around items-center bottom-0 bg-dark1 p-2 w-full"
+        >
+          <BottomNavigationAction
+            label="Home"
+            value="home"
+            icon={<HomeIcon />}
+            component={Link}
+            to="/"
+            onClick={handleHomeLinkClick}
+          />
+          <BottomNavigationAction
+            label="Community"
+            value="community"
+            icon={<HowToVoteIcon />}
+            component={Link}
+            to="/community"
+          />
+          <BottomNavigationAction
+            label="Upload"
+            value="upload"
+            icon={<AddIcon />}
+            component={Link}
+            to="/upload-server"
+          />
+          <BottomNavigationAction
+            label="Sponsors"
+            value="sponsors"
+            icon={<PersonIcon />}
+            component={Link}
+            to="/sponsors"
+          />
+        </BottomNavigation>
+      )}
     </div>
   );
 };
