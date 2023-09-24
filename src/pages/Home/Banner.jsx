@@ -1,147 +1,236 @@
-import thumb1 from "../../assets/thumb-1.jpg";
-import thumb2 from "../../assets/thumb-2.jpg";
-import thumb3 from "../../assets/thumb-3.jpg";
-import { Container } from "../../components/Container";
-import { Swiper, SwiperSlide } from "swiper/react";
+import React, { useState, useEffect } from 'react';
+import { Container } from '../../components/Container';
+import {
+  Paper,
+  Typography,
+  IconButton,
+  Box,
+  MobileStepper,
+  Button,
+  Chip,
+} from '@mui/material';
+import { KeyboardArrowLeft, KeyboardArrowRight, ContentCopy } from '@mui/icons-material';
+import { autoPlay } from 'react-swipeable-views-utils';
+import SwipeableViews from 'react-swipeable-views';
+import thumb1 from '../../assets/thumb-1.jpg';
+import thumb2 from '../../assets/thumb-2.jpg';
+import thumb3 from '../../assets/thumb-3.jpg';
 
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/navigation";
-import "swiper/css/thumbs";
+const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
-import { FreeMode, Navigation, Thumbs, Autoplay } from "swiper/modules";
-
-import { useState } from "react";
-import ServerModal from "../../components/ServerModal";
-
-const comments = [
+const images = [
   {
-    serverImage: thumb3,
-    serverName: "Julia HG",
-    comment:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, dolor. Omnis sapiente atque qui nobis nisi, sed rerum quaerat harum.",
+    label: 'PlayCY',
+    ip_address: 'playcy.net',
+    imgPath: thumb1,
   },
   {
-    serverImage: thumb3,
-    serverName: "Julia HG",
-    comment:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, dolor. Omnis sapiente atque qui nobis nisi, sed rerum quaerat harum.",
+    label: 'Bird',
+    ip_address: 'example.com',
+    imgPath: thumb2,
   },
   {
-    serverImage: thumb3,
-    serverName: "Julia HG",
-    comment:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, dolor. Omnis sapiente atque qui nobis nisi, sed rerum quaerat harum.",
+    label: 'Bali, Indonesia',
+    ip_address: 'sample.net',
+    imgPath: thumb3,
   },
   {
-    serverImage: thumb3,
-    serverName: "Julia HG",
-    comment:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, dolor. Omnis sapiente atque qui nobis nisi, sed rerum quaerat harum.",
+    label: 'Goč, Serbia',
+    ip_address: 'gochost.net',
+    imgPath: thumb1,
   },
-  {
-    serverImage: thumb3,
-    serverName: "Julia HG",
-    comment:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, dolor. Omnis sapiente atque qui nobis nisi, sed rerum quaerat harum.",
-  },
-  {
-    serverImage: thumb3,
-    serverName: "Julia HG",
-    comment:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, dolor. Omnis sapiente atque qui nobis nisi, sed rerum quaerat harum.",
-  },
-  {
-    serverImage: thumb3,
-    serverName: "Julia HG",
-    comment:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, dolor. Omnis sapiente atque qui nobis nisi, sed rerum quaerat harum.",
-  },
-];
-
-const topServers = [
-  { thumbnail: thumb1 },
-  { thumbnail: thumb2 },
-  { thumbnail: thumb3 },
-  { thumbnail: thumb1 },
-  { thumbnail: thumb2 }
 ];
 
 const Banner = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalActiveItem, setModalActiveItem] = useState(1);
+  const [activeStep, setActiveStep] = useState(0);
+  const [isMobileView, setIsMobileView] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [showChip, setShowChip] = useState(false);
+  const maxSteps = images.length;
 
-  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  useEffect(() => {
+    // Check if the screen width is less than or equal to 719px (mobile view)
+    const handleResize = () => {
+      setIsMobileView(window.innerWidth <= 719);
+    };
 
-  const showModal = () => {
-    setIsModalOpen(true);
+    // Initialize the view state and add a resize listener
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    // Remove the resize listener when the component unmounts
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => (prevActiveStep + 1) % maxSteps);
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => (prevActiveStep - 1 + maxSteps) % maxSteps);
   };
 
-  const [selectedThumbs, setSelectedThumbs] = useState(0);
+  const handleDotClick = (index) => {
+    setActiveStep(index);
+  };
+
+  const copyIpAddress = (ipAddress) => {
+    navigator.clipboard.writeText(ipAddress).then(() => {
+      setCopied(true);
+      setShowChip(true);
+
+      setTimeout(() => {
+        setCopied(false);
+        setShowChip(false);
+      }, 2000); // Reset copied state and hide the Chip after 2 seconds
+    });
+  };
+
+  const renderNavigationDots = () => {
+    return (
+      <MobileStepper
+        variant="dots"
+        steps={maxSteps}
+        position="static"
+        activeStep={activeStep}
+        nextButton={
+          <IconButton size="small" onClick={handleNext} disabled={maxSteps === 0}>
+            <KeyboardArrowRight />
+          </IconButton>
+        }
+        backButton={
+          <IconButton size="small" onClick={handleBack} disabled={maxSteps === 0}>
+            <KeyboardArrowLeft />
+          </IconButton>
+        }
+      >
+        {images.map((step, index) => (
+          <IconButton
+            key={index}
+            onClick={() => handleDotClick(index)}
+            color={index === activeStep ? 'primary' : 'default'}
+          >
+            <span className="dot-button" />
+          </IconButton>
+        ))}
+      </MobileStepper>
+    );
+  };
 
   return (
     <div className="bg-dark1 p-5">
       <Container>
-        <Swiper
-          autoplay={{
-            delay: 4000,
-            disableOnInteraction: false,
-          }}
-          loop={true}
-          spaceBetween={10}
-          navigation={true}
-          thumbs={{
-            swiper:
-              thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
-          }}
-          modules={[Autoplay, FreeMode, Navigation, Thumbs]}
-          className="mySwiper2"
-        >
-          {topServers.map((server, index) => (
-            <SwiperSlide key={index}>
-              <img
-                onClick={showModal}
-                src={server.thumbnail}
-                alt="slide1"
-                className="w-full md:h-96 h-40 object-cover cursor-pointer rounded-2xl"
-              />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-        <Swiper
-          loop={true}
-          slideToClickedSlide={true}
-          onSwiper={setThumbsSwiper}
-          spaceBetween={5}
-          slidesPerView={topServers.length}
-          freeMode={true}
-          watchSlidesProgress={true}
-          modules={[FreeMode, Navigation, Thumbs]}
-          className="mySwiper mt-10"
-        >
-          {topServers.map((server, index) => (
-            <SwiperSlide key={index}>
-              <img
-                onClick={() => setSelectedThumbs(index)}
-                src={server.thumbnail}
-                alt="slide1"
-                className={`w-full border-2 md:h-32 h-12 transition-all duration-500 object-cover cursor-pointer rounded-2xl`}
-              />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-        <ServerModal
-          closeModal={closeModal}
-          isModalOpen={isModalOpen}
-          comments={comments}
-          modalActiveItem={modalActiveItem}
-          setModalActiveItem={setModalActiveItem}
-        />
+        <div className="relative">
+          <AutoPlaySwipeableViews
+            axis="x"
+            index={activeStep}
+            onChangeIndex={setActiveStep}
+            enableMouseEvents
+          >
+            {images.map((step, index) => (
+              <div key={step.label}>
+                <img
+                  src={step.imgPath}
+                  alt={step.label}
+                  className="w-full md:h-96 h-40 object-cover cursor-pointer rounded-2xl"
+                />
+              </div>
+            ))}
+          </AutoPlaySwipeableViews>
+          <div
+            className={`absolute ${
+              isMobileView ? 'top-2 right-2' : 'left-0 bottom-0 right-0'
+            } p-4`}
+            style={{
+              background: isMobileView
+                ? 'transparent'
+                : 'linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0))',
+            }}
+          >
+            {isMobileView ? (
+              <div
+                style={{
+                  color: 'white',
+                  fontSize: '0.8rem',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-end',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <Chip // Wrap the Chip and IconButton in a div
+                    label={`${images[activeStep].label} - IP: ${images[activeStep].ip_address}`}
+                    color="primary"
+                    style={{
+                      marginBottom: '0.2rem',
+                      transition: 'opacity 0.5s',
+                      opacity: copied ? 0 : 1,
+                    }}
+                  />
+                  <IconButton
+                    color="primary"
+                    size="small"
+                    onClick={() => {
+                      copyIpAddress(images[activeStep].ip_address);
+                    }}
+                    style={{
+                      backgroundColor: 'white',
+                      borderRadius: '50%',
+                      transition: 'opacity 0.5s',
+                      opacity: copied ? 0 : 1,
+                    }}
+                  >
+                    <ContentCopy />
+                  </IconButton>
+                </div>
+                {showChip && (
+                  <Chip
+                    label="COPIED"
+                    color="primary"
+                    style={{
+                      fontSize: '0.8rem',
+                      marginBottom: '0.2rem',
+                      transition: 'opacity 0.5s',
+                      opacity: copied ? 1 : 0,
+                    }}
+                  />
+                )}
+              </div>
+            ) : (
+              <div
+                style={{
+                  color: 'white',
+                  fontSize: '0.8rem',
+                  padding: '8px',
+                  borderRadius: '4px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                }}
+              >
+                <Typography variant="h5">{images[activeStep].label}</Typography>
+                <Typography variant="body2" style={{ marginBottom: '0.5rem' }}>
+                  IP: {images[activeStep].ip_address}
+                </Typography>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  size="small"
+                  onClick={() => copyIpAddress(images[activeStep].ip_address)}
+                  style={{
+                    background: copied ? 'transparent' : 'yellow',
+                    boxShadow: copied ? 'none' : '2px 2px 4px rgba(0, 0, 0, 0.5)',
+                  }}
+                >
+                  {copied ? 'COPIED' : 'Click to Copy'}
+                </Button>
+              </div>
+            )}
+          </div>
+        </div>
+        {renderNavigationDots()}
       </Container>
     </div>
   );

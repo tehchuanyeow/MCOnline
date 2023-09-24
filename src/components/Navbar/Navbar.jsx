@@ -27,6 +27,9 @@ import Drawer from '@mui/material/Drawer';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Badge from '@mui/material/Badge';
+import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack';
+import Skeleton from '@mui/material/Skeleton';
 
 export const Navbar = () => {
   const notificationCount = 2;
@@ -126,24 +129,6 @@ export const Navbar = () => {
     },
   ];
 
-  const downNavItems = [
-    {
-      lable: "Group Coaching",
-      href: "/",
-      icon: <BiSolidGroup />,
-    },
-    {
-      lable: "Personal Coaching",
-      href: "/",
-      icon: <BsFillPersonFill />,
-    },
-    {
-      lable: "Career Coaching",
-      href: "/",
-      icon: <BsFillPersonVcardFill />,
-    },
-  ];
-
   const location = useLocation();
 
   const handleHomeLinkClick = () => {
@@ -159,7 +144,7 @@ export const Navbar = () => {
       <div className="border-b border-b-dark2">
         <div className="container mx-auto flex items-center justify-between gap-5">
           <Link to={"/"} className="text-lg font-bold m-5">
-            <Avatar src={brand} alt="MCOnline Logo" className="w-20 h-20" />
+            <Avatar src={brand} alt="MCOnline Logo"/>
           </Link>
           <nav className={`${ open ? "flex" : "hidden" } sm:flex sm:items-center sm:gap-5`}>
           {open && (
@@ -223,22 +208,6 @@ export const Navbar = () => {
           )}
         </div>
       </div>
-      <div className="border-b border-b-dark2">
-        <nav className="container mx-auto hidden w-full p-3 sm:flex justify-between items-center sm:text-md text-xs">
-          {downNavItems.map((item, index) => (
-            <Dropdown key={index} menu={{ items }} className="cursor-pointer">
-              <a
-                className="flex items-center gap-2"
-                onClick={(e) => e.preventDefault()}
-              >
-                <i className="text-3xl">{item.icon}</i>
-                <Space>{item.lable}</Space>
-              </a>
-            </Dropdown>
-          ))}
-        </nav>
-      </div>
-
             {/* User Profile Drawer */}
             <Drawer
         anchor="right"
@@ -247,9 +216,13 @@ export const Navbar = () => {
       >
         {/* Add your user profile content here */}
         <div style={{ width: '250px', padding: '20px' }}>
-          {/* User profile content */}
-          <h2>User Profile</h2>
-          {/* Add your user profile information here */}
+        <Stack direction="row" spacing={1}>
+      <Chip
+        avatar={<Avatar alt="Natacha" src={avatar} size="large" />}
+        label="Avatar"
+        variant="outlined"
+      />
+    </Stack>
         </div>
       </Drawer>
 

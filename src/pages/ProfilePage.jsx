@@ -1,72 +1,26 @@
-import { Container } from "../components/Container";
+import React from 'react';
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Container,
+  Typography,
+} from '@mui/material';
 
 const items = [
   {
     id: 1,
-    thumbnail:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
-    title: "Server Title",
-    serverName: "Server Name",
-    serverImage:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
-    views: 224,
-    uploadeAt: "5/8/2023",
+    title: 'Video Title 1',
+    views: '100',
+    thumbnail: 'https://example.com/thumbnail1.jpg',
   },
   {
     id: 2,
-    thumbnail:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
-    title: "Server Title",
-    serverName: "Server Name",
-    serverImage:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
-    views: 224,
-    uploadeAt: "5/8/2023",
+    title: 'Video Title 2',
+    views: '200',
+    thumbnail: 'https://example.com/thumbnail2.jpg',
   },
-  {
-    id: 3,
-    thumbnail:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
-    title: "Server Title",
-    serverName: "Server Name",
-    serverImage:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
-    views: 224,
-    uploadeAt: "5/8/2023",
-  },
-  {
-    id: 4,
-    thumbnail:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
-    title: "Server Title",
-    serverName: "Server Name",
-    serverImage:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
-    views: 224,
-    uploadeAt: "5/8/2023",
-  },
-  {
-    id: 5,
-    thumbnail:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
-    title: "Server Title",
-    serverName: "Server Name",
-    serverImage:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
-    views: 224,
-    uploadeAt: "5/8/2023",
-  },
-  {
-    id: 6,
-    thumbnail:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
-    title: "Server Title",
-    serverName: "Server Name",
-    serverImage:
-      "https://blog.photoadking.com/wp-content/uploads/2021/06/1673927931336-735x400.jpg",
-    views: 224,
-    uploadeAt: "5/8/2023",
-  },
+  // Add more items as needed
 ];
 
 const ProfilePage = () => {
@@ -107,7 +61,7 @@ const ProfilePage = () => {
               src="https://www.youtube.com/embed/AjWfY7SnMBI"
               title="24 hours + of pure black screen in HD!"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen
+              allowFullScreen
             ></iframe>
           </div>
           <div className="bg-dark1/5 p-5 flex-1">
@@ -122,16 +76,25 @@ const ProfilePage = () => {
             <hr className="my-2 border border-green-500" />
             <div className="flex flex-col gap-3">
               {items.map((content) => (
-                <div key={content.id} className="flex gap-2">
-                  <img className="w-40" src={content.thumbnail} alt="" />
-                  <div>
-                    <h6>{content.title}</h6>
+                <Card key={content.id}>
+                  <CardMedia
+                    component="img"
+                    alt=""
+                    height="140"
+                    image={content.thumbnail}
+                  />
+                  <CardContent>
+                    <Typography variant="h6">{content.title}</Typography>
                     <div className="flex gap-2">
-                      <h6 className="text-xs">{content.views}k views</h6>
-                      <h6 className="text-xs">7 months ago</h6>
+                      <Typography variant="body2" color="textSecondary">
+                        {content.views}k views
+                      </Typography>
+                      <Typography variant="body2" color="textSecondary">
+                        7 months ago
+                      </Typography>
                     </div>
-                  </div>
-                </div>
+                  </CardContent>
+                </Card>
               ))}
             </div>
           </div>
